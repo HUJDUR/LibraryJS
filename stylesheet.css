@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+html {
+    background-image: linear-gradient( rgba(0,0,0,.7), rgba(0,0,0,.7)), url(./media/pozadina.jpeg);
+    background-size: cover;
+}
+
+#biblioteka {
+    font-family: Roboto;
+    padding: 20px;
+    position: absolute;
+    margin-top: -70px;
+    margin-left: -170px;
+    top: 50%;
+    left: 50%;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid black;
+}
+
+#naslov {
+    margin-top: -5px;
+}
+
+#button {
+    font-family: Roboto;
+}
