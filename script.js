@@ -17,7 +17,82 @@ function pregledUnosa() {
 		break;
 		case '2' : kreiranjeKnjige();
 		break;
+		case '3' : podizanjeKnjige();
+		break;
+		case '4' : vracanjeKnjige();
+		break;
+		case '5' : ispisDetalja();
+		break;
 	}
+}
+
+function vracanjeKnjige() {
+
+	let imeRacuna = prompt('Unesite ime racuna', '');
+	let imeKnjige = prompt('Unesite ime knjige');
+
+	if (provjeraRacunaPriPodizanju(imeRacuna) && provjeraKnjigePriVracanju(imeKnjige)) {
+		
+		for (let i = 0; i < knjige.length; i++) {
+			if (knjige[i].imeKnjige == imeKnjige) {
+				knjige[i].status = false;
+			}
+		}
+
+		for (let i = 0; i < korisnici.length; i++) {
+			if (korisnici[i].imeRacuna == imeRacuna) {
+				for (let j = 0; j < korisnici[i].knjige.length; j++) {
+					if (korisnici[i].knjige[j] == imeKnjige) {
+						korisnici[i].knjige.splice(korisnici[i].knjige[j], 1);
+					}
+				}
+			}
+		}
+
+		alert('Uspjesno ste vratili knjigu');
+	}
+
+}
+
+function ispisDetalja() {
+
+	let imeRacuna = prompt('Unesite ime racuna', '');
+
+	for (let i = 0; i < korisnici.length; i++) {
+		if (korisnici[i].imeRacuna == imeRacuna) {
+			alert(korisnici[i].imeRacuna + " " + korisnici[i].brojRacuna + " " + korisnici[i].knjige.length);
+		} else {
+			alert('Uneseni racun ne postoji');
+		}
+	}
+
+}
+
+function podizanjeKnjige() {
+
+	let imeRacuna = prompt('Unesite ime racuna', '');
+	let imeKnjige = prompt('Unesite ime knjige', '');
+
+	if (provjeraRacunaPriPodizanju(imeRacuna) && provjeraKnjigePriPodizanju(imeKnjige)) {
+		
+		let knjiga;
+
+		for (let i = 0; i < knjige.length; i++) {
+			if (knjige[i].imeKnjige == imeKnjige) {
+				knjige[i].status = true;
+				knjiga = knjige[i];
+			}
+		}
+
+		for (let i = 0; i < korisnici.length; i++) {
+			if (korisnici[i].imeRacuna == imeRacuna) {
+				korisnici[i].knjige.push(knjiga);
+			}
+		}
+
+		alert('Uspjesno ste digli knjigu');
+	}
+
 }
 
 function kreiranjeKnjige() {
@@ -56,6 +131,60 @@ function kreiranjeRacuna() {
 
 		korisnici.push(korisnik);
 	} 
+}
+
+function provjeraRacunaPriPodizanju(imeRacuna) {
+
+	for (let i = 0; i < korisnici.length; i++) {
+		if (korisnici[i].imeRacuna == imeRacuna) {
+			return true;
+		}
+	}	
+	
+	alert('Unijeti racun ne postoji');
+	return false;
+}
+
+function provjeraKnjigePriPodizanju(imeKnjige) {
+	
+	for (let i = 0; i < knjige.length; i++) {
+		if (knjige[i].imeKnjige == imeKnjige) {
+			if (knjige[i].status == true) {
+				alert('Knjiga je dignuta');
+				return false;
+			}
+		}
+	}
+
+	for (let i = 0; i < knjige.length; i++) {
+		if (knjige[i].imeKnjige == imeKnjige) {
+			return true;
+		}
+	}
+
+	alert('Unijeta knjiga ne postoji');
+	return false;
+}
+
+function provjeraKnjigePriVracanju(imeKnjige) {
+
+	for (let i = 0; i < knjige.length; i++) {
+		if (knjige[i].imeKnjige == imeKnjige) {
+			if (knjige[i].status == false) {
+				alert('Knjiga je u biblioteci');
+				return false;
+			}
+		}
+	}
+
+	for (let i = 0; i < knjige.length; i++) {
+		if (knjige[i].imeKnjige == imeKnjige) {
+			return true;
+		}
+	}
+
+	alert('Unijeta knjiga ne postoji');
+	return false;
 }
 
 function provjeraRacuna(imeRacuna, brojRacuna) {
