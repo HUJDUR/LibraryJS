@@ -42,7 +42,7 @@ function vracanjeKnjige() {
 		for (let i = 0; i < korisnici.length; i++) {
 			if (korisnici[i].imeRacuna == imeRacuna) {
 				for (let j = 0; j < korisnici[i].knjige.length; j++) {
-					if (korisnici[i].knjige[j] == imeKnjige) {
+					if (korisnici[i].knjige[j].imeKnjige == imeKnjige) {
 						korisnici[i].knjige.splice(korisnici[i].knjige[j], 1);
 					}
 				}
