@@ -28,8 +28,8 @@ function pregledUnosa() {
 
 function vracanjeKnjige() {
 
-	let imeRacuna = prompt('Unesite ime racuna', '');
-	let imeKnjige = prompt('Unesite ime knjige');
+	let imeRacuna = prompt('Unesite ime racuna:', '');
+	let imeKnjige = prompt('Unesite ime knjige:', '');
 
 	if (provjeraRacunaPriPodizanju(imeRacuna) && provjeraKnjigePriVracanju(imeKnjige)) {
 		
@@ -49,20 +49,20 @@ function vracanjeKnjige() {
 			}
 		}
 
-		alert('Uspjesno ste vratili knjigu');
+		alert('Uspjesno ste vratili knjigu!');
 	}
 
 }
 
 function ispisDetalja() {
 
-	let imeRacuna = prompt('Unesite ime racuna', '');
+	let imeRacuna = prompt('Unesite ime racuna:', '');
 
 	for (let i = 0; i < korisnici.length; i++) {
 		if (korisnici[i].imeRacuna == imeRacuna) {
 			alert(korisnici[i].imeRacuna + " " + korisnici[i].brojRacuna + " " + korisnici[i].knjige.length);
 		} else {
-			alert('Uneseni racun ne postoji');
+			alert('Uneseni racun ne postoji!');
 		}
 	}
 
@@ -70,8 +70,8 @@ function ispisDetalja() {
 
 function podizanjeKnjige() {
 
-	let imeRacuna = prompt('Unesite ime racuna', '');
-	let imeKnjige = prompt('Unesite ime knjige', '');
+	let imeRacuna = prompt('Unesite ime racuna:', '');
+	let imeKnjige = prompt('Unesite ime knjige:', '');
 
 	if (provjeraRacunaPriPodizanju(imeRacuna) && provjeraKnjigePriPodizanju(imeKnjige)) {
 		
@@ -90,7 +90,7 @@ function podizanjeKnjige() {
 			}
 		}
 
-		alert('Uspjesno ste digli knjigu');
+		alert('Uspjesno ste digli knjigu!');
 	}
 
 }
@@ -98,19 +98,13 @@ function podizanjeKnjige() {
 function kreiranjeKnjige() {
 	
 	let imeKnjige = prompt('Unesite ime knjige:', '');
-	let brojKnjige = prompt('Unesite broj knjige' ,'');
+	let brojKnjige = prompt('Unesite broj knjige:' ,'');
 	let status = false;
 
 	if (provjeraKnjige(brojKnjige)) {
 		alert('Uspjesno ste kreirali knjigu!');
 		
-		let knjiga = {
-			imeKnjige,
-			brojKnjige,
-			status
-		};
-
-		knjige.push(knjiga);
+		knjige.push(knjiga(imeKnjige, brojKnjige, status));
 	}
 
 }
@@ -118,18 +112,12 @@ function kreiranjeKnjige() {
 function kreiranjeRacuna() {
 
 	let imeRacuna = prompt('Unesite vase ime:', '');
-	let brojRacuna = prompt('Unesite broj racuna', '');
+	let brojRacuna = prompt('Unesite broj racuna:', '');
 
 	if (provjeraRacuna(imeRacuna, brojRacuna)) {
-		alert('Racun uspjesno napravljen.');
-		
-		let korisnik = {
-			imeRacuna,
-			brojRacuna,
-			knjige : new Array()
-		};
+		alert('Racun uspjesno napravljen!');
 
-		korisnici.push(korisnik);
+		korisnici.push(korisnik(imeRacuna, brojRacuna));
 	} 
 }
 
@@ -141,7 +129,7 @@ function provjeraRacunaPriPodizanju(imeRacuna) {
 		}
 	}	
 	
-	alert('Unijeti racun ne postoji');
+	alert('Unijeti racun ne postoji!');
 	return false;
 }
 
@@ -150,7 +138,7 @@ function provjeraKnjigePriPodizanju(imeKnjige) {
 	for (let i = 0; i < knjige.length; i++) {
 		if (knjige[i].imeKnjige == imeKnjige) {
 			if (knjige[i].status == true) {
-				alert('Knjiga je dignuta');
+				alert('Knjiga je dignuta!');
 				return false;
 			}
 		}
@@ -162,7 +150,7 @@ function provjeraKnjigePriPodizanju(imeKnjige) {
 		}
 	}
 
-	alert('Unijeta knjiga ne postoji');
+	alert('Unijeta knjiga ne postoji!');
 	return false;
 }
 
@@ -171,7 +159,7 @@ function provjeraKnjigePriVracanju(imeKnjige) {
 	for (let i = 0; i < knjige.length; i++) {
 		if (knjige[i].imeKnjige == imeKnjige) {
 			if (knjige[i].status == false) {
-				alert('Knjiga je u biblioteci');
+				alert('Knjiga je u biblioteci!');
 				return false;
 			}
 		}
@@ -183,17 +171,17 @@ function provjeraKnjigePriVracanju(imeKnjige) {
 		}
 	}
 
-	alert('Unijeta knjiga ne postoji');
+	alert('Unijeta knjiga ne postoji!');
 	return false;
 }
 
 function provjeraRacuna(imeRacuna, brojRacuna) {
 	for (let i = 0; i < korisnici.length; i++) {
 		if (korisnici[i].brojRacuna == brojRacuna) {
-			alert('Vec postoji racun sa unesenim brojem');
+			alert('Vec postoji racun sa unesenim brojem!');
 			return false;
 		} else if (korisnici[i].imeRacuna == imeRacuna) {
-			alert('Vec postoji racun sa unesenim imenom');
+			alert('Vec postoji racun sa unesenim imenom!');
 			return false;
 		}
 	}
@@ -203,11 +191,33 @@ function provjeraRacuna(imeRacuna, brojRacuna) {
 function provjeraKnjige(brojKnjige) {
 	for (let i = 0; i < knjige.length; i++) {
 		if (knjige[i].brojKnjige == brojKnjige) {
-			alert('Vec postoji knjiga sa unijetim brojem');
+			alert('Vec postoji knjiga sa unijetim brojem!');
 			return false;
 		}
 	}
 	return true;
+}
+
+function korisnik(imeRacuna, brojRacuna) {
+
+	let korisnik = {
+		imeRacuna,
+		brojRacuna,
+		knjige : new Array()
+	};
+
+	return korisnik;
+}
+
+function knjiga(imeKnjige, brojKnjige, status) {
+
+	let knjiga = {
+		imeKnjige,
+		brojKnjige,
+		status
+	};
+
+	return knjiga;
 }
 
 document.getElementById('button').addEventListener('click', function(){
