@@ -117,7 +117,7 @@ function kreiranjeRacuna() {
 	if (provjeraRacuna(imeRacuna, brojRacuna)) {
 		alert('Racun uspjesno napravljen!');
 
-		korisnici.push(korisnik(imeRacuna, brojRacuna));
+		korisnici.push(new Korisnik(imeRacuna, brojRacuna));
 	} 
 }
 
@@ -198,15 +198,11 @@ function provjeraKnjige(brojKnjige) {
 	return true;
 }
 
-function korisnik(imeRacuna, brojRacuna) {
+function Korisnik(imeRacuna, brojRacuna) {
 
-	let korisnik = {
-		imeRacuna,
-		brojRacuna,
-		knjige : new Array()
-	};
-
-	return korisnik;
+	this.imeRacuna = imeRacuna;
+	this.brojRacuna = brojRacuna;
+	this.knjige = new Array();
 }
 
 function knjiga(imeKnjige, brojKnjige, status) {
